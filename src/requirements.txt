@@ -1,0 +1,5 @@
+trio
+pyfuse3
+imap_tools
+python-slugify
+loguru

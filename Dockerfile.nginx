@@ -1,0 +1,8 @@
+FROM debian:10-slim
+
+RUN apt-get update && apt-get install -y nginx-full && rm -rf /var/lib/apt/lists/*
+
+COPY nginx-webdav.conf /etc/nginx/sites-enabled/nginx-webdav.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+
+CMD nginx -g "daemon off;"
