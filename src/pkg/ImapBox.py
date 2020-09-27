@@ -94,6 +94,7 @@ class ImapBox:
 
     def _group_duplicates(self, uids) -> typing.List[typing.Tuple[str, str]]:
         metas = [self._the_map['uids'][uid] for uid in uids]
+        metas = sorted(metas, key=lambda m: m.timestamp, reverse=False)
         files = [(meta.sender + "-" + meta.subject_slug, meta.uid) for meta in metas]
 
         # Can't figure out how to write it clearly in python so that it doesn't
@@ -184,7 +185,6 @@ class ImapBox:
                 mark_seen=False,
                 limit=int(msg_limit) if msg_limit else None,
                 bulk=True,
-                reverse=True,
             )
 
             return [msg for msg in res]

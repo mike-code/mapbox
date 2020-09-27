@@ -32,9 +32,6 @@ from pkg.MailboxFs import MailboxFs
 #  - REFRESH_INTERVAL (default=120)
 #  - LOGURU_LEVEL (optional)
 
-# todotodo
-# - sort by date asc
-
 
 async def refresh_loop(box):
     while True:
