@@ -1,36 +1,18 @@
-version: '3.7'
+version: '3.4'
 
 services:
-  webdav:
-    build:
-      context: .
-      dockerfile: Dockerfile.nginx
-    ports:
-      - 8080:8080
-    volumes:
-      - type: bind
-        source: /mnt
-        target: /mnt
-        bind:
-          propagation: shared
-
   app:
     build:
       context: .
-      dockerfile: Dockerfile.python
+    ports:
+      - 8080:8080
     environment:
       IMAP_USER: 'foo'
       IMAP_PASS: 'bar'
-      IMAP_HOST: 'imap.gmail.com'
+      IMAP_HOST: 'imap.fastmail.com'
       MSG_LIMIT: 20
       REFRESH_INTERVAL: 30
       LOGURU_LEVEL: TRACE
-    volumes:
-      - type: bind
-        source: /mnt
-        target: /mnt
-        bind:
-          propagation: shared
     # mounting a new FS seems to be not possible
     # without SYS_ADMIN cap, but it doesn't work
     # even with ALL caps, instead it requires
@@ -40,6 +22,3 @@ services:
     privileged: true
     devices:
       - '/dev/fuse'
-
-volumes:
-  shared_mnt:
